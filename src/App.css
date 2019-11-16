@@ -1,0 +1,43 @@
+code {
+  background-color: darkgray;
+  color: greenyellow;
+  display: inline-block;
+  padding: 5px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 4px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+@media only screen and (max-width: 768px) {
+  code {
+    font-size: 0.8rem;
+  }
+
+  img {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  code {
+    font-size: 0.6rem;
+  }
+
+  img {
+    width: 300px;
+  }
+}
