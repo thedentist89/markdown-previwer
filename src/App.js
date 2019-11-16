@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import marked from "marked";
 import "./App.css";
@@ -73,7 +73,7 @@ const Content = styled.div`
   min-height: 200px;
 `;
 
-const content = `# Welcome to my React Markdown Previewer!
+const values = `# Welcome to my React Markdown Previewer!
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:
@@ -120,44 +120,32 @@ And here. | Okay. | I think we get it.
 ![React Logo w/ Text](https://goo.gl/Umyytc)
 `;
 
-class App extends Component {
-  state = {
-    content: ""
-  };
+function App() {
+  const [content, setContent] = useState(values);
 
-  componentDidMount() {
-    this.setState({ content });
+  function handleChange({ currentTarget: input }) {
+    setContent(input.value);
   }
 
-  handleChange = ({ currentTarget: input }) => {
-    this.setState({ content: input.value });
-  };
-
-  createMarkup = () => {
-    return { __html: marked(this.state.content) };
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <Editor>
-          <Title>Editor</Title>
-          <Textarea
-            id="editor"
-            value={this.state.content}
-            onChange={this.handleChange}
-          />
-        </Editor>
-        <Wrapper>
-          <Title light>Preview</Title>
-          <Content
-            id="content"
-            dangerouslySetInnerHTML={this.createMarkup()}
-          ></Content>
-        </Wrapper>
-      </div>
-    );
+  function createMarkup() {
+    return { __html: marked(content) };
   }
+
+  return (
+    <div className="App">
+      <Editor>
+        <Title>Editor</Title>
+        <Textarea id="editor" value={content} onChange={handleChange} />
+      </Editor>
+      <Wrapper>
+        <Title light>Preview</Title>
+        <Content
+          id="content"
+          dangerouslySetInnerHTML={createMarkup()}
+        ></Content>
+      </Wrapper>
+    </div>
+  );
 }
 
 export default App;
